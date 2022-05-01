@@ -1,3 +1,3 @@
 # Pizza api with deno
 
-```$ denon dev (or start)```
+`$ denon dev (or start)`

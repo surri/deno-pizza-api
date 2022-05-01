@@ -4,10 +4,8 @@ async function findAll({ response }: Context) {
     response.status = 200;
     response.body = {
         success: true,
-        msg: "find all Pizza",
-    }
+        msg: 'find all Pizza',
+    };
 }
 
-export {
-    findAll,
-}
+export { findAll };
