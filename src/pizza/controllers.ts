@@ -1,7 +1,7 @@
 import { Context, helpers } from 'https://deno.land/x/oak@v6.0.1/mod.ts';
 import Pizza from './pizza.ts';
 
-async function findAll({ response }: Context) {
+export async function findAll({ response }: Context) {
     try {
         const pizza = await Pizza.all();
         response.status = 200;
@@ -15,7 +15,7 @@ async function findAll({ response }: Context) {
     }
 }
 
-async function findOne(context: Context) {
+export async function findOne(context: Context) {
     const { id } = helpers.getQuery(context, { mergeParams: true });
     const { response } = context;
 
@@ -35,10 +35,31 @@ async function findOne(context: Context) {
             };
         }
     } catch (error) {
-        console.log(error);
         response.status = 500;
         response.body = { message: error.message };
     }
 }
 
-export { findAll, findOne };
+export async function create(context: Context) {
+    const { response, request } = context;
+
+    try {
+        // const pizza = new Pizza();
+        // pizza.name = '하와이안피자';
+        // pizza.description = '이게피자라고?';
+        // await pizza.save();
+
+        const body = request.body({ type: 'json' });
+        const pizza = await body.value;
+        const result = await Pizza.create(pizza);
+
+        response.status = 200;
+        response.body = {
+            success: true,
+            data: { id: result.lastInsertId },
+        };
+    } catch (error) {
+        response.status = 500;
+        response.body = { message: error.message };
+    }
+}

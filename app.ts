@@ -6,5 +6,6 @@ const port = Number(env.PORT) || 3000;
 const app = new Application();
 
 app.use(router.routes());
+app.use(router.allowedMethods());
 app.listen({ port });
 console.log(`Running at http://localhost:${port}/`);

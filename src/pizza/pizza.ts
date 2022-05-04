@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'https://deno.land/x/denodb@v1.0.40/mod.ts';
+import { DataTypes, Model } from 'https://deno.land/x/denodb/mod.ts';
 import database from '../../database.ts';
 
 class Pizza extends Model {
