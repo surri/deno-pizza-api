@@ -63,3 +63,22 @@ export async function create(context: Context) {
         response.body = { message: error.message };
     }
 }
+
+export async function update(context: Context) {
+    const { response, request } = context;
+    const { id } = helpers.getQuery(context, { mergeParams: true });
+
+    try {
+        const body = request.body({ type: 'json' });
+        const pizza = await body.value;
+        const result = await Pizza.where('id', id).update(pizza);
+
+        response.status = 200;
+        response.body = {
+            success: true,
+        };
+    } catch (error) {
+        response.status = 500;
+        response.body = { message: error.message };
+    }
+}

@@ -3,7 +3,6 @@ import database from '../../database.ts';
 
 class Pizza extends Model {
     static table = 'pizza';
-    static timestamps = true;
     static fields = {
         id: {
             primaryKey: true,
